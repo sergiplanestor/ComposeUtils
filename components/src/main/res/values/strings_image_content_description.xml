@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="default_image_content_description" translatable="false">Image</string>
+    <string name="default_icon_content_description" translatable="false">Icon</string>
+
+</resources>
