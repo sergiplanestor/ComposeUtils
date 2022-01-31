@@ -1,5 +1,5 @@
 plugins {
-    libPlugins(/*GradlePlugin.Publish*/).forEach(::id)
+    libPlugins(GradlePlugin.Publish).forEach(::id)
 }
 
 android {
@@ -32,22 +32,4 @@ dependencies {
     test()
 }
 
-/*
-afterEvaluate {
-    publishing {
-        publications {
-            release {
-                from(releaseComponent)
-                groupId = artifactGroup
-                artifactId = artifactId(isDebug = false)
-                version = artifactVersion
-            }
-            debug {
-                from(debugComponent)
-                groupId = artifactGroup
-                artifactId = artifactId(isDebug = true)
-                version = artifactVersion
-            }
-        }
-    }
-}*/
+publish()
