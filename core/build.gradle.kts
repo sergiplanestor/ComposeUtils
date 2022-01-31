@@ -1,5 +1,5 @@
 plugins {
-    libPlugins(/*GradlePlugin.Publish*/).forEach(::id)
+    libPlugins(GradlePlugin.Publish).forEach(::id)
 }
 
 android {
@@ -17,6 +17,12 @@ android {
     composeOptions { kotlinCompilerExtensionVersion = DependencyVersion.compose }
 
     excludeCommonPackages()
+
+    println("Lib: Core ---------------------")
+    components.forEach {
+        println(it.name)
+    }
+    println("---------------------")
 }
 
 dependencies {
@@ -30,13 +36,8 @@ dependencies {
 }
 
 val srcJar by tasks.creating(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    description = "Assembles sources JAR"
     archiveClassifier.set("sources")
-    from(project.android.sourceSets.getByName("main").java.srcDirs)
+    from(android.sourceSets.getByName("main").java.srcDirs)
 }
 
-/*
-artifacts { archives(srcJar) }
-
-publish(srcJar)*/
+publish(srcJar)
