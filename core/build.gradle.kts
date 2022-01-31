@@ -1,5 +1,5 @@
 plugins {
-    libPlugins(GradlePlugin.Publish).forEach(::id)
+    libPlugins(/*GradlePlugin.Publish*/).forEach(::id)
 }
 
 android {
@@ -36,6 +36,7 @@ val srcJar by tasks.creating(Jar::class) {
     from(project.android.sourceSets.getByName("main").java.srcDirs)
 }
 
+/*
 artifacts { archives(srcJar) }
 
-publish(srcJar)
+publish(srcJar)*/
