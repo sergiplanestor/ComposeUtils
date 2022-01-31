@@ -1,5 +1,5 @@
 plugins {
-    libPlugins(GradlePlugin.Publish).forEach(::id)
+    libPlugins(/*GradlePlugin.Publish*/).forEach(::id)
 }
 
 android {
@@ -35,4 +35,4 @@ dependencies {
     test()
 }
 
-publish()
+//publish()

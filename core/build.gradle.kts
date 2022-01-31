@@ -29,4 +29,23 @@ dependencies {
     test()
 }
 
-publish()
+//publish()
+
+afterEvaluate {
+    publishing {
+        publications {
+            release {
+                from(releaseComponent)
+                groupId = artifactGroup
+                artifactId = artifactId(isDebug = false)
+                version = artifactVersion
+            }
+            debug {
+                from(debugComponent)
+                groupId = artifactGroup
+                artifactId = artifactId(isDebug = true)
+                version = artifactVersion
+            }
+        }
+    }
+}
