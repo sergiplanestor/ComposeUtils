@@ -32,8 +32,6 @@ dependencies {
     test()
 }
 
-//publish()
-
 afterEvaluate {
     publishing {
         publications {
