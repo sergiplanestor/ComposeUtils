@@ -6,21 +6,22 @@ import androidx.navigation.NavArgumentBuilder
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 
 
-abstract class BaseSingleActivity : BaseComposeActivity() {
+abstract class BaseComposeNavActivity : BaseComposeActivity() {
 
+    protected lateinit var navController: NavHostController
     abstract val initNav: String
 
     @Composable
     override fun ScreenContent() {
-        val navController = rememberNavController()
         NavHost(
-            navController = navController,
+            navController = rememberNavController().also { navController = it },
             startDestination = initNav
         ) {
             onCreateNavGraph()
@@ -29,22 +30,22 @@ abstract class BaseSingleActivity : BaseComposeActivity() {
 
     abstract fun NavGraphBuilder.onCreateNavGraph()
 
-    protected fun NavGraphBuilder.navDestinationOf(
-        route: String,
-        args: List<NamedNavArgument> = emptyList(),
-        deepLinks: List<NavDeepLink> = emptyList(),
+    protected fun NavGraphBuilder.destinationOf(
+        route: NavRoute,
+        args: List<NamedNavArgument>,
+        deepLinks: List<NavDeepLink>,
         builder: @Composable NavBackStackEntry.() -> Unit
     ) {
-        composable(route, args, deepLinks) { builder(it) }
+        composable(route.key, args, deepLinks) { builder(it) }
     }
 
-    protected fun NavGraphBuilder.navDestinationOf(
-        route: String,
+    protected fun NavGraphBuilder.destinationOf(
+        route: NavRoute,
         arg: NamedNavArgument? = null,
         deepLink: NavDeepLink? = null,
         builder: @Composable NavBackStackEntry.() -> Unit
     ) {
-        navDestinationOf(
+        destinationOf(
             route,
             arg?.let { listOf(arg) }.orEmpty(),
             deepLink?.let { listOf(deepLink) }.orEmpty(),
@@ -54,4 +55,13 @@ abstract class BaseSingleActivity : BaseComposeActivity() {
 
     protected fun navArgsOf(vararg args: Pair<String, NavArgumentBuilder.() -> Unit>): List<NamedNavArgument> =
         args.map { navArgument(it.first, it.second) }
+
+    protected fun navRoute(route: String): NavRoute =
+        object : NavRoute {
+            override val key: String get() = route
+        }
+
+    interface NavRoute {
+        val key: String
+    }
 }

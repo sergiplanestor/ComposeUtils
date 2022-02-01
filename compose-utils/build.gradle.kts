@@ -32,4 +32,4 @@ dependencies {
     test()
 }
 
-//publish()
+publish()
