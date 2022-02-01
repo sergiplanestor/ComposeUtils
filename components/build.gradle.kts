@@ -16,21 +16,12 @@ android {
     composeOptions { kotlinCompilerExtensionVersion = DependencyVersion.compose }
 
     excludeCommonPackages()
-
-    /*println("Lib: Components ---------------------")
-    components.forEach {
-        println(it.name)
-    }
-    println("---------------------")*/
 }
 
 dependencies {
 
     module(name = "core")
     module(name = "compose-utils")
-    implementation(project(":core")) {
-
-    }
 
     androidCore()
     androidRuntime()

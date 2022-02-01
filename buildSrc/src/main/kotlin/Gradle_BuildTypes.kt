@@ -29,7 +29,7 @@ class Flavor(
     companion object {
         fun release(
             name: String = release,
-            isMinifyEnabled: Boolean = true,
+            isMinifyEnabled: Boolean = /*true*/ false,
             isDebuggable: Boolean = false,
             suffix: String? = null,
             signingConfigName: String? = release,

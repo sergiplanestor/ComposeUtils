@@ -16,12 +16,6 @@ android {
     composeOptions { kotlinCompilerExtensionVersion = DependencyVersion.compose }
 
     excludeCommonPackages()
-
-    /*println("Lib: Common ---------------------")
-    components.forEach {
-        println(it.name)
-    }
-    println("---------------------")*/
 }
 
 dependencies {
