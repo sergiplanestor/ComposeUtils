@@ -12,10 +12,10 @@ sealed class GradlePlugin(open val value: String) {
             plugins.toMutableList().apply {
                 val moduleTypePlugin = if (isAppModule) App else Lib
                 if (!contains(moduleTypePlugin)) {
-                    add(moduleTypePlugin)
+                    add(0, moduleTypePlugin)
                 }
                 if (!contains(Kotlin)) {
-                    add(Kotlin)
+                    add(1, Kotlin)
                 }
             }.map { it.value }
 

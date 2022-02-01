@@ -26,13 +26,13 @@ fun Project.publish(src: Any) {
 }
 
 private fun Project.release(container: PublicationContainer, src: Any) {
-    container.create<MavenPublication>("release") {
+    container.create<MavenPublication>("release-${name}") {
         applyPublishConfig(this@release, src, isDebug = false)
     }
 }
 
 private fun Project.debug(container: PublicationContainer, src: Any) {
-    container.create<MavenPublication>("debug") {
+    container.create<MavenPublication>("debug-${name}") {
         applyPublishConfig(this@debug, src, isDebug = true)
     }
 }
