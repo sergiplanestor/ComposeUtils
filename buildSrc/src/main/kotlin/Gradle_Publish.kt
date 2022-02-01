@@ -6,9 +6,7 @@ import org.gradle.api.publish.PublicationContainer
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.provideDelegate
-import java.util.*
 
 private val group: String by lazy { "com.github.sergiplanestor" }
 
@@ -26,14 +24,14 @@ fun Project.publish(src: Any) {
     }
 }
 
-private fun Project.release(container: PublicationContainer, src: Any) {
-    container.create<MavenPublication>("release-${Date().time}") {
+fun Project.release(container: PublicationContainer, src: Any) {
+    container.create<MavenPublication>("release-${project.name}") {
         applyPublishConfig(this@release, src, isDebug = false)
     }
 }
 
-private fun Project.debug(container: PublicationContainer, src: Any) {
-    container.create<MavenPublication>("debug-${Date().time}") {
+fun Project.debug(container: PublicationContainer, src: Any) {
+    container.create<MavenPublication>("debug-${project.name}") {
         applyPublishConfig(this@debug, src, isDebug = true)
     }
 }
@@ -41,10 +39,10 @@ private fun Project.debug(container: PublicationContainer, src: Any) {
 private fun Project.artifactId(isDebug: Boolean): String =
     project.name + if (isDebug) "-debug" else ""
 
-private fun Project.components(isDebug: Boolean): SoftwareComponent =
-    components[if (isDebug) "debug" else "release"]
+private fun Project.components(isDebug: Boolean): SoftwareComponent? =
+    components.find { it.name == (if (isDebug) "debug-" else "release-") + name }
 
-private fun MavenPublication.applyPublishConfig(
+fun MavenPublication.applyPublishConfig(
     project: Project,
     src: Any,
     isDebug: Boolean
