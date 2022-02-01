@@ -29,9 +29,4 @@ dependencies {
     test()
 }
 
-val srcJar by tasks.creating(Jar::class) {
-    archiveClassifier.set("sources")
-    from(android.sourceSets.getByName("main").java.srcDirs)
-}
-
-publish(srcJar)
+publish()

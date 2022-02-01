@@ -13,7 +13,7 @@ internal typealias DC = DefaultConfig
 internal typealias PF = ProductFlavor
 internal typealias CExt<T, U, V, W> = CommonExtension<T, U, V, W>
 
-fun KotlinJvmOptions.jvmTarget(target: String = "11") {
+fun KotlinJvmOptions.jvmTarget(target: String = "1.8") {
     jvmTarget = target
 }
 
