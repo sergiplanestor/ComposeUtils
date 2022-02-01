@@ -1,5 +1,5 @@
 plugins {
-    libPlugins(/*GradlePlugin.Publish*/).forEach(::id)
+    libPlugins(GradlePlugin.Publish).forEach(::id)
 }
 
 android {
@@ -35,7 +35,6 @@ dependencies {
     test()
 }
 
-/*
 val srcJar by tasks.creating(Jar::class) {
     group = JavaBasePlugin.DOCUMENTATION_GROUP
     description = "Assembles sources JAR"
@@ -45,4 +44,4 @@ val srcJar by tasks.creating(Jar::class) {
 
 artifacts { archives(srcJar) }
 
-publish(srcJar)*/
+publish(srcJar)

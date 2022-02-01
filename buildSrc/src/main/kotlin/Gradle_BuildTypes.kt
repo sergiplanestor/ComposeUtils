@@ -29,7 +29,7 @@ class Flavor(
     companion object {
         fun release(
             name: String = release,
-            isMinifyEnabled: Boolean = /*true*/ false,
+            isMinifyEnabled: Boolean = true,
             isDebuggable: Boolean = false,
             suffix: String? = null,
             signingConfigName: String? = release,
@@ -87,7 +87,7 @@ fun <T : BF, U : BT, V : DC, W : PF> CExt<T, U, V, W>.flavors(isApp: Boolean, va
                             }
                         }
                     }
-                    isMinifyEnabled = data.isMinifyEnabled
+                    isMinifyEnabled = data.isMinifyEnabled && isApp
                     defineProguardFiles(proguardDefaultFile())
                     data.extraConfig.invoke(this)
                 }
