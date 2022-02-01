@@ -8,6 +8,7 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.provideDelegate
+import java.util.*
 
 private val group: String by lazy { "com.github.sergiplanestor" }
 
@@ -26,13 +27,13 @@ fun Project.publish(src: Any) {
 }
 
 private fun Project.release(container: PublicationContainer, src: Any) {
-    container.create<MavenPublication>("release-${name}") {
+    container.create<MavenPublication>("release-${Date().time}") {
         applyPublishConfig(this@release, src, isDebug = false)
     }
 }
 
 private fun Project.debug(container: PublicationContainer, src: Any) {
-    container.create<MavenPublication>("debug-${name}") {
+    container.create<MavenPublication>("debug-${Date().time}") {
         applyPublishConfig(this@debug, src, isDebug = true)
     }
 }
